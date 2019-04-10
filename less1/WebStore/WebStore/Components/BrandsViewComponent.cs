@@ -8,11 +8,11 @@ using WebStore.ViewModels;
 
 namespace WebStore.Components
 {
-    public class BrandViewComponent: ViewComponent
+    public class BrandsViewComponent: ViewComponent
     {
         private readonly IProductData _ProductData;
 
-        public BrandViewComponent (IProductData productData)
+        public BrandsViewComponent (IProductData productData)
         {
             _ProductData = productData;
         }
