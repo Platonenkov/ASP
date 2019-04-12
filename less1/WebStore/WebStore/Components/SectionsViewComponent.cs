@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.ViewModels;
+using WebStore.Infrastructure.Map;
 
 namespace WebStore.Components
 {
@@ -28,23 +29,13 @@ namespace WebStore.Components
             var sections = _ProductData.GetSections();
             var parent_sections = sections
                 .Where(section => section.ParentId == null)
-                .Select(section => new SectionViewModel
-                {
-                    Id = section.Id,
-                    Name = section.Name,
-                    Order = section.Order
-                })
+                .Select(section => section.CreateViewModel())
                 .ToList();
             foreach (var parent_section in parent_sections)
             {
                 var child_sections = sections
                     .Where(section => section.ParentId == parent_section.Id)
-                    .Select(section => new SectionViewModel
-                    {
-                        Id = section.Id,
-                        Name = section.Name,
-                        Order = section.Order
-                    });
+                    .Select(section => section.CreateViewModel());
                 parent_section.ChildSections.AddRange(child_sections);
                 parent_section.ChildSections.Sort((a, b) => Comparer<int>.Default.Compare(a.Order, b.Order));
             }
