@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebStore.Controllers.Implementations;
 using WebStore.Controllers.Interfaces;
+using WebStore.DAL.Context;
 using WebStore.Infrastructure.Implementations;
 using WebStore.Infrastructure.Interfaces;
 
@@ -25,6 +27,9 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<WebStoreContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConection")));
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddMvc();
