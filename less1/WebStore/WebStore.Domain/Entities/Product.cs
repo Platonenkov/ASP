@@ -15,7 +15,7 @@ namespace WebStore.Domain.Entities
         public int SectionId { get; set; }
 
         [ForeignKey(nameof(SectionId))]
-        public virtual Section Section {get;set;}
+        public virtual Section Section {get;set;} // Указываем сязь по внешнему ключу для данного навигационного свойства
 
         public int? BrandId { get; set; }
 

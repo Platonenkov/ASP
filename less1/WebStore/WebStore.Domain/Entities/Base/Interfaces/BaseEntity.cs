@@ -11,7 +11,8 @@ namespace WebStore.Domain.Entities.Base.Interfaces
     /// </summary>
     public abstract class BaseEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key] // Указание на то, что свойство является первичным ключем таблицы
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Требование для БД устанавливать значение данного свойства при добавлении записи в таблицу
                public int Id { get; set; }
     }
 }
