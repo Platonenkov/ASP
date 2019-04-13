@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WebStore.Controllers.Implementations;
 using WebStore.Controllers.Interfaces;
 using WebStore.DAL.Context;
+using WebStore.Data;
 using WebStore.Infrastructure.Implementations;
 using WebStore.Infrastructure.Interfaces;
 
@@ -27,6 +28,7 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<WebStoreContextInitializer>();
 
             services.AddDbContext<WebStoreContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConection")));
@@ -35,8 +37,10 @@ namespace WebStore
             services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreContextInitializer db)
         {
+            db.InitializeAsync().Wait();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
