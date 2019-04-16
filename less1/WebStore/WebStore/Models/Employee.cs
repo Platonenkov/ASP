@@ -16,10 +16,12 @@ namespace WebStore.Models
         public int Id { get; set; }
 
         [Display(Name ="Имя"), Required(ErrorMessage="Test message")]
+        [RegularExpression(@"(^[А-ЯЁ][а-яё]{2,150}$)|(^[A-z][a-z]{2,150}$)", ErrorMessage ="Некорректный формат имени")]
         [MinLength(3)]
         public string FirstName { get; set; }
 
         [Display(Name = "Фамилия"), Required(ErrorMessage = "Поле является обязательным")]
+        [RegularExpression(@"(^[А-ЯЁ][а-яё]{2,150}$)|(^[A-z][a-z]{2,150}$)", ErrorMessage = "Некорректный формат Фамилии")]
         [MinLength(2)]
         public string SurName { get; set; }
 

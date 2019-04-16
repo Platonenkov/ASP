@@ -16,6 +16,8 @@ using WebStore.Data;
 using WebStore.Domain.Entities;
 using WebStore.Infrastructure.Implementations;
 using WebStore.Infrastructure.Interfaces;
+using WebStore.Models;
+using AutoMapper;
 
 namespace WebStore
 {
@@ -73,8 +75,13 @@ namespace WebStore
                 cfg.SlidingExpiration = true;
 
             });
+            services.AddAutoMapper(opt => opt.CreateMap<Employee, Employee>());
 
             services.AddMvc();
+            //AutoMapper.Mapper.Initialize(opt =>
+            //{
+            //    opt.CreateMap<Employee, Employee>();
+            //});
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreContextInitializer db)
