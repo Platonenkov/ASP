@@ -1,32 +1,33 @@
 ﻿@model WebStore.Models.Employee
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" charset="utf-8" />
-    <title>Страница Index</title>
-</head>
-<body>
-    <h3>Карточка сотрудника</h3>
+@{
+    ViewData["Title"] = "Сотрудники";
+    Layout = "_Layout";
+}
+<h3>Карточка сотрудника</h3>
+<div style="display:flex; justify-content:space-around; border:double">
     <div>
         <p>Фамилия</p>
-        <p>@Model.SurName</p>
+        <p><b>@Model.SurName</b></p>
     </div>
 
     <div>
         <p>Имя</p>
-        <p>@Model.FirstName</p>
+        <p><b>@Model.FirstName</b></p>
     </div>
 
     <div>
         <p>Отчество</p>
-        <p>@Model.Patronymic</p>
+        <p><b>@Model.Patronymic</b></p>
     </div>
 
     <div>
         <p>Возраст</p>
-        <p>@Model.Age</p>
+        <p><b>@Model.Age</b></p>
     </div>
 
-    <a asp-controller="Employes" asp-action="Index">К списку сотрудников</a>
-</body>
-</html>
+    <div>
+        <p>Дата устроства</p>
+        <p><b>@Model.Date.Day | @Model.Date.Month | @Model.Date.Year</b></p>
+    </div>
+</div>
+<a asp-controller="Employes" asp-action="Index">Назад</a>
