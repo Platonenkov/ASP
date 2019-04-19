@@ -12,6 +12,8 @@ namespace WebStore.Infrastructure.Implementations
     {
         public IEnumerable<Brand> GetBrands() => TestData.Brands;
 
+        public Product GetProductById(int id) => TestData.Products.FirstOrDefault(product => product.Id == id);
+
         public IEnumerable<Product> GetProducts(ProductFilter Filter)
         {
             IEnumerable<Product> products = TestData.Products;
@@ -24,5 +26,6 @@ namespace WebStore.Infrastructure.Implementations
         }
 
         public IEnumerable<Section> GetSections() => TestData.Sections;
+
     }
 }

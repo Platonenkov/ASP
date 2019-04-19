@@ -37,5 +37,15 @@ namespace WebStore.Infrastructure.Implementations
         public IEnumerable<Section> GetSections() => _db.Sections
             .Include(s => s.Products)
             .AsEnumerable();
+
+
+        public Product GetProductById(int id)
+        {
+            return _db.Products
+            .Include(product => product.Brand)
+            .Include(product => product.Section)
+            .FirstOrDefault(product => product.Id == id);
+
+        }
     }
 }
