@@ -38,6 +38,7 @@ namespace WebStore
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConection")));
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IProductData, SqlProductData>();
+            services.AddScoped<ICartService, CookieCartService>();
 
             services.AddIdentity<User, IdentityRole>(options => 
             {

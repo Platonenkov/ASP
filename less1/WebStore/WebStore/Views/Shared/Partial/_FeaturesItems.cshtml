@@ -10,16 +10,18 @@
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        <img src="@product.ImageUrl" alt="" />
+                        <img src="~/images/shop/@product.ImageUrl" alt="товар" />
                         <h2>@(product.Price.ToString("C"))</h2>
                         <p>@product.Name</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-default add-to-cart">
+                        <i class="fa fa-shopping-cart"></i>Добавить в корзину</a>
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
                             <h2>@product.Price.ToString("C")</h2>
-                            <p>@product.Name</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            <p><a asp-controller="Catalog" asp-action="ProductDetails" asp-route-id="@product.Id">@product.Name</a></p>
+                            <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-default add-to-cart">
+                            <i class="fa fa-shopping-cart"></i>Добавить в корзину</a>
                         </div>
                     </div>
                 </div>
