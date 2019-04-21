@@ -10,7 +10,7 @@
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        <img src="@product.ImageUrl" alt="" />
+                        <img src="~/images/shop/@product.ImageUrl" alt="товар" />
                         <h2>@(product.Price.ToString("C"))</h2>
                         <p>@product.Name</p>
                         <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-default add-to-cart">

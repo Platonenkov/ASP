@@ -14,7 +14,7 @@ namespace WebStore.Infrastructure.Implementations
     public class CookieCartService : ICartService
     {
         private readonly IProductData _ProductData;
-        private readonly HttpContextAccessor _HttpContextAccessor;
+        private readonly IHttpContextAccessor _HttpContextAccessor;
         private readonly string _CartName;
 
         private Cart Cart
@@ -58,7 +58,7 @@ namespace WebStore.Infrastructure.Implementations
             }
         }
 
-        public CookieCartService(IProductData ProductData, HttpContextAccessor HttpContextAccessor)
+        public CookieCartService(IProductData ProductData, IHttpContextAccessor HttpContextAccessor)
         {
             _ProductData = ProductData;
             _HttpContextAccessor = HttpContextAccessor;
