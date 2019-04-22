@@ -15,9 +15,9 @@ namespace WebStore.Infrastructure.Interfaces
         /// <summary>
         /// Показывает заказы пользователя
         /// </summary>
-        /// <param name="user">Пользователь</param>
+        /// <param name="UserName">Пользователь</param>
         /// <returns>перечисление заказов</returns>
-        IEnumerable<Order> GetUserOrders(User user);
+        IEnumerable<Order> GetUserOrders(string UserName);
 
         /// <summary>
         /// Получение заказа по идентификатору

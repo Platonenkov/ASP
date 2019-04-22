@@ -67,12 +67,12 @@ namespace WebStore.Infrastructure.Implementations
                 .Include(o => o.OrderItems).FirstOrDefault(o => o.Id == id);
         }
 
-        public IEnumerable<Order> GetUserOrders(User user)
+        public IEnumerable<Order> GetUserOrders(string UserName)
         {
             return _db.Orders
                  .Include(order => order.User)
                  .Include(order => order.OrderItems)
-                 .Where(order => order.User.UserName == user.UserName)
+                 .Where(order => order.User.UserName == UserName)
                  .ToArray();
         }
     }
