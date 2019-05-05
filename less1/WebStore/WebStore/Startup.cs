@@ -6,12 +6,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using WebStore.Clients.Values;
 using WebStore.Controllers.Implementations;
 using WebStore.DAL.Context;
 using WebStore.Data;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Models;
 using WebStore.Infrastructure.Implementations;
+using WebStore.Interfaces.Api;
 using WebStore.Interfaces.Servcies;
 
 namespace WebStore
@@ -34,6 +36,8 @@ namespace WebStore
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<ICartService, CookieCartService>();
+
+            services.AddTransient<IValuesService, ValuesClient>();
 
             services.AddIdentity<User, IdentityRole>(options => 
             {
