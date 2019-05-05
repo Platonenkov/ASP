@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace WebStore.Domain.Entities.Base.Interfaces
+namespace WebStore.Domain.Entities.Base
 {
     /// <summary>
     /// Сущность

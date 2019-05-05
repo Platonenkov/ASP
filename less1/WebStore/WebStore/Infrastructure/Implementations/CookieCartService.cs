@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using WebStore.Domain.Entities;
-using WebStore.Infrastructure.Interfaces;
-using WebStore.Models;
-using WebStore.ViewModels;
+using WebStore.Domain.Models;
+using WebStore.Domain.ViewModels;
+using WebStore.Interfaces.Servcies;
 
 namespace WebStore.Infrastructure.Implementations
 {
@@ -25,8 +25,7 @@ namespace WebStore.Infrastructure.Implementations
                 var cookie = http_context.Request.Cookies[_CartName];
 
                 Cart cart = null;
-
-                if(cookie is null)
+                if (cookie is null)
                 {
                     cart = new Cart();
                     http_context.Response.Cookies.Append(
@@ -39,24 +38,25 @@ namespace WebStore.Infrastructure.Implementations
                     http_context.Response.Cookies.Delete(_CartName);
                     http_context.Response.Cookies.Append(_CartName, cookie, new CookieOptions
                     {
-                        Expires=DateTime.Now.AddDays(1)
+                        Expires = DateTime.Now.AddDays(1)
                     });
                 }
+
                 return cart;
             }
-
             set
             {
                 var http_context = _HttpContextAccessor.HttpContext;
+
                 var json = JsonConvert.SerializeObject(value);
                 http_context.Response.Cookies.Delete(_CartName);
                 http_context.Response.Cookies.Append(_CartName, json, new CookieOptions
                 {
                     Expires = DateTime.Now.AddDays(1)
                 });
-
             }
         }
+
 
         public CookieCartService(IProductData ProductData, IHttpContextAccessor HttpContextAccessor)
         {
@@ -64,27 +64,14 @@ namespace WebStore.Infrastructure.Implementations
             _HttpContextAccessor = HttpContextAccessor;
 
             var user = HttpContextAccessor.HttpContext.User;
-
             var user_name = user.Identity.IsAuthenticated ? user.Identity.Name : null;
-
             _CartName = $"cart{user_name}";
-        }
-
-        public void AddtoCart(int id)
-        {
-            var cart = Cart;
-            var item = cart.Items.FirstOrDefault(i => i.ProductId == id);
-            if (item != null)
-                item.Quantity++;
-            else
-                cart.Items.Add(new CartItem { ProductId = id, Quantity = 1 });
-            Cart = cart;
-
         }
 
         public void DecrementFromCart(int id)
         {
             var cart = Cart;
+
             var item = cart.Items.FirstOrDefault(i => i.ProductId == id);
             if (item != null)
             {
@@ -92,9 +79,22 @@ namespace WebStore.Infrastructure.Implementations
                     item.Quantity--;
                 if (item.Quantity == 0)
                     cart.Items.Remove(item);
+
                 Cart = cart;
             }
+        }
 
+        public void RemoveFromCart(int id)
+        {
+            var cart = Cart;
+
+            var item = cart.Items.FirstOrDefault(i => i.ProductId == id);
+
+            if (item != null)
+            {
+                cart.Items.Remove(item);
+                Cart = cart;
+            }
         }
 
         public void RemoveAll()
@@ -102,29 +102,28 @@ namespace WebStore.Infrastructure.Implementations
             var cart = Cart;
             cart.Items.Clear();
             Cart = cart;
-
         }
 
-        public void RemoveFromCart(int id)
+        public void AddToCart(int id)
         {
             var cart = Cart;
             var item = cart.Items.FirstOrDefault(i => i.ProductId == id);
-            if (item != null)
-            {
-                cart.Items.Remove(item);
-                Cart = cart;
-            }
 
+            if (item != null)
+                item.Quantity++;
+            else
+                cart.Items.Add(new CartItem { ProductId = id, Quantity = 1 });
+            Cart = cart;
         }
 
         public CartViewModel TransformCart()
         {
             var products = _ProductData.GetProducts(new ProductFilter
             {
-                Ids=Cart.Items.Select(item=>item.ProductId).ToList()
+                Ids = Cart.Items.Select(item => item.ProductId).ToList()
             });
 
-            var products_view_model = products.Select(p => new ProductViewModel
+            var products_view_models = products.Select(p => new ProductViewModel
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -133,12 +132,14 @@ namespace WebStore.Infrastructure.Implementations
                 ImageUrl = p.ImageUrl,
                 Brand = p.Brand?.Name
             });
+
             return new CartViewModel
-                {
-                Items= Cart.Items.ToDictionary(
-                    x=>products_view_model.First(p=>p.Id==x.ProductId),
-                    x=>x.Quantity)
-                };
+            {
+                Items = Cart.Items.ToDictionary(
+                    x => products_view_models.First(p => p.Id == x.ProductId),
+                    x => x.Quantity)
+            };
+
         }
     }
 }

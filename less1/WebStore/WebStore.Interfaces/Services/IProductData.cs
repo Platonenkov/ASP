@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WebStore.Domain.Entities;
 
-namespace WebStore.Infrastructure.Interfaces
+namespace WebStore.Interfaces.Servcies
 {
-    /// <summary>
-    /// Сервис товаров
-    /// </summary>
+    /// <summary>Сервис товаров</summary>
     public interface IProductData
     {
         IEnumerable<Section> GetSections();

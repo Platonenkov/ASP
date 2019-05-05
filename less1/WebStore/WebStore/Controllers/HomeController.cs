@@ -9,7 +9,7 @@ namespace WebStore.Controllers
     public class HomeController : Controller
     {
         public IActionResult Index() => View(); //Content("Hello"); 
-        public IActionResult NotFound()=> View();
+        public IActionResult Error404()=> View();
         public IActionResult Blog()=> View();
         public IActionResult BlogSingle()=> View();
         public IActionResult Checkout()=> View();

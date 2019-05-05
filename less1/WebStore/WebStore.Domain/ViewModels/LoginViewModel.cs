@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebStore.ViewModels
+namespace WebStore.Domain.ViewModels
 {
     public class LoginViewModel
     {
-        [Display(Name = "Имя пользователя")]
+        [Display(Name = "Имя пользвоателя"), MaxLength(256, ErrorMessage = "Максимальная длина 256 символов")]
         public string UserName { get; set; }
 
         [Display(Name = "Пароль"), Required, DataType(DataType.Password)]

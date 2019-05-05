@@ -1,33 +1,48 @@
-﻿@model WebStore.Models.Employee
+﻿@model WebStore.Domain.Models.Employee
+
 @{
-    ViewData["Title"] = "Сотрудники";
-    Layout = "_Layout";
+    ViewData["Title"] = "EmployeeView";
 }
-<h3>Карточка сотрудника</h3>
-<div style="display:flex; justify-content:space-around; border:double">
-    <div>
-        <p>Фамилия</p>
-        <p><b>@Model.SurName</b></p>
-    </div>
 
-    <div>
-        <p>Имя</p>
-        <p><b>@Model.FirstName</b></p>
-    </div>
+<h2>EmployeeView</h2>
 
-    <div>
-        <p>Отчество</p>
-        <p><b>@Model.Patronymic</b></p>
-    </div>
-
-    <div>
-        <p>Возраст</p>
-        <p><b>@Model.Age</b></p>
-    </div>
-
-    <div>
-        <p>Дата устроства</p>
-        <p><b>@Model.Date.Day | @Model.Date.Month | @Model.Date.Year</b></p>
-    </div>
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SurName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SurName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patronymic)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patronymic)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+    </dl>
 </div>
-<a asp-controller="Employes" asp-action="Index">Назад</a>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>

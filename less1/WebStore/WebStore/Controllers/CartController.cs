@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using WebStore.Infrastructure.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebStore.Interfaces.Servcies;
 
 namespace WebStore.Controllers
 {
@@ -42,7 +38,7 @@ namespace WebStore.Controllers
 
         public IActionResult AddToCart(int id)
         {
-            _CartService.AddtoCart(id);
+            _CartService.AddToCart(id);
             return RedirectToAction("Details");
         }
 

@@ -1,4 +1,6 @@
-﻿namespace WebStore.Domain.Entities.Base.Interfaces
+﻿using WebStore.Domain.Entities.Base.Interfaces;
+
+namespace WebStore.Domain.Entities.Base
 {
     /// <summary>
     /// Именованная сущность

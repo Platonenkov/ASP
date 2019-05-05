@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using WebStore.Domain.Entities;
-using WebStore.ViewModels;
+using WebStore.Domain.ViewModels;
 
 namespace WebStore.Controllers
 {
@@ -22,7 +19,7 @@ namespace WebStore.Controllers
         public IActionResult Register() => View();
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterUserViewModel model)
+        public async Task<IActionResult> Register(RegistrerUserViewModel model)
         {
             if (!ModelState.IsValid) return View(model); //Если  данные не корректные то на доработку
 

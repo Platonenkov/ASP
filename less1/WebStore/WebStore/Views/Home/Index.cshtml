@@ -1,9 +1,9 @@
 ﻿@{
-    Layout = "_LayoutBase";
     ViewBag.Title = "Главная страница";
+    Layout = "_LayoutBase";
 }
 
-    @await Html.PartialAsync("Partial/_Slider")
+@await Html.PartialAsync("Partial/_Slider")
 
 <section>
     <div class="container">
@@ -13,27 +13,23 @@
             </div>
 
             <div class="col-sm-9 padding-right">
-                @await Html.PartialAsync("Partial/_FeaturesItems", new WebStore.ViewModels.ProductViewModel[0])
-
                 @await Html.PartialAsync("Partial/_CategoryTab")
-
-                @await Html.PartialAsync("Partial/_RecommendedItems")
-
+                @await Html.PartialAsync("Partial/_RecomendedItems")
             </div>
         </div>
     </div>
 </section>
 
-@section Scripts{ 
-<script>
-    $("section").click(function () {
-
-    })
+@section Scripts
+    {
+    <script>
+        $("section").click(function () {
+        });
     </script>
 }
 
-@section Styles{ 
-<style>
-
+@section Styles
+    {
+    <style>
     </style>
 }

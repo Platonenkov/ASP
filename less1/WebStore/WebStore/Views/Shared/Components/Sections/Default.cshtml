@@ -1,11 +1,9 @@
-﻿@model IEnumerable<WebStore.ViewModels.SectionViewModel>
-
+﻿@model IEnumerable<WebStore.Domain.ViewModels.SectionViewModel>
 <h2>Категории</h2>
 
 <div class="panel-group category-products" id="accordian">
     <!--category-productsr-->
-
-    @foreach(var parent_section in Model)
+    @foreach (var parent_section in Model)
     {
         if (parent_section.ChildSections.Count > 0)
         {
@@ -21,9 +19,9 @@
                 <div id="@parent_section.Id" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul>
-                            @foreach(var child_section in parent_section.ChildSections)
+                            @foreach (var child_section in parent_section.ChildSections)
                             {
-                            <li><a href="#">@child_section.Name</a></li>
+                                <li><a href="#">@child_section.Name</a></li>
                             }
                         </ul>
                     </div>
@@ -35,9 +33,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                    <a href="#">
-                        @parent_section.Name
-                    </a>
+                        <a href="#">
+                            @parent_section.Name
+                        </a>
                     </h4>
                 </div>
             </div>
