@@ -39,6 +39,8 @@ namespace WebStore
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<ICartService, CookieCartService>();
+            services.AddScoped<IOrderService, SqlOrdersService>();
+
 
             services.AddIdentity<User, IdentityRole>(options => 
             {
@@ -102,6 +104,11 @@ namespace WebStore
 
             app.UseMvc(route =>
             {
+                route.MapRoute(
+                  name: "areas",
+                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+
                 route.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

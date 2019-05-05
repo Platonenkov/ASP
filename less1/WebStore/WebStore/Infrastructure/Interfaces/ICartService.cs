@@ -29,7 +29,7 @@ namespace WebStore.Infrastructure.Interfaces
         void AddtoCart(int id);
 
         /// <summary>
-        /// Формирует на основе сервиса модель представления в корзины чтобы передать ее в представление
+        /// Формирует на основе сервиса модель представления корзины чтобы передать ее в представление
         /// </summary>
         /// <returns></returns>
         CartViewModel TransformCart();

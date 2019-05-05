@@ -16,6 +16,16 @@ namespace WebStore.DAL.Context
 
         public DbSet<Brand> Brands { get; set; }
 
+        /// <summary>
+        /// Таблица элемента заказа
+        /// </summary>
+        public DbSet<OrderItem> OrderItems { get; set; }
+        /// <summary>
+        /// Таблица заказов
+        /// </summary>
+        public DbSet<Order> Orders { get; set; }
+
+
         public WebStoreContext(DbContextOptions<WebStoreContext> options)
             :base(options)
         {
