@@ -7,7 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore", "WebStore\WebSto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Domain", "WebStore.Domain\WebStore.Domain.csproj", "{6BB177ED-BBDC-4660-93C8-568102465159}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.DAL", "WebStore.DAL\WebStore.DAL.csproj", "{581866D4-C9C7-41B9-BDA1-46DE1AE1B25A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.DAL", "WebStore.DAL\WebStore.DAL.csproj", "{581866D4-C9C7-41B9-BDA1-46DE1AE1B25A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{11813D84-9DB7-4C7B-A4B4-FDE3D240A25F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{BA352C5C-5263-4741-9F98-3FF08218733F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{782DAA6D-6D9D-48C1-A8B1-C374ABC2063D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +36,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{42051A60-6002-4D96-8D92-4150D7116BA9} = {782DAA6D-6D9D-48C1-A8B1-C374ABC2063D}
+		{6BB177ED-BBDC-4660-93C8-568102465159} = {11813D84-9DB7-4C7B-A4B4-FDE3D240A25F}
+		{581866D4-C9C7-41B9-BDA1-46DE1AE1B25A} = {BA352C5C-5263-4741-9F98-3FF08218733F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {869F4F40-42FB-46C3-89F5-F5ECB4F3BEEA}
