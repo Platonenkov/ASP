@@ -6,17 +6,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
-using WebStore.Services.Data;
 
-namespace WebStore.Services.Data
+namespace WebStore.Data
 {
-    public class DbInitializer
+    public class WebStoreContextInitializer
     {
         private readonly WebStoreContext _db;
         private readonly UserManager<User> _UserManager;
         private readonly RoleManager<IdentityRole> _RoleManager;
 
-        public DbInitializer(
+        public WebStoreContextInitializer(
             WebStoreContext db,
             UserManager<User> UserManager,
             RoleManager<IdentityRole> RoleManager)
