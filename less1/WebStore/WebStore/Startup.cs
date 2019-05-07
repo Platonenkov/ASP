@@ -7,14 +7,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using WebStore.Clients.Values;
-using WebStore.Controllers.Implementations;
 using WebStore.DAL.Context;
-using WebStore.Data;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Models;
 using WebStore.Infrastructure.Implementations;
 using WebStore.Interfaces.Api;
 using WebStore.Interfaces.Servcies;
+using WebStore.Services.Data;
+using WebStore.Services.InMemory;
 
 namespace WebStore
 {
@@ -29,7 +29,7 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<WebStoreContextInitializer>();
+            services.AddTransient<DbInitializer>();
 
             services.AddDbContext<WebStoreContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConection")));
@@ -84,7 +84,7 @@ namespace WebStore
             //});
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreContextInitializer db)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DbInitializer db)
         {
             db.InitializeAsync().Wait();
 
