@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entities;
 using WebStore.Domain.ViewModels;
 using WebStore.Infrastructure.Map;
-using WebStore.Interfaces.Servcies;
+using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
 {

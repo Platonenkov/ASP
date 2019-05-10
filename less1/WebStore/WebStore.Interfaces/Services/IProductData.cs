@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WebStore.Domain.Entities;
 
-namespace WebStore.Interfaces.Servcies
+namespace WebStore.Interfaces.Services
 {
     /// <summary>Сервис товаров</summary>
     public interface IProductData

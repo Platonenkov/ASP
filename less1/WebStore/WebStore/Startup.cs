@@ -7,14 +7,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using WebStore.Clients.Values;
-using WebStore.Controllers.Implementations;
 using WebStore.DAL.Context;
 using WebStore.Data;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Models;
-using WebStore.Infrastructure.Implementations;
+using WebStore.Services;
 using WebStore.Interfaces.Api;
-using WebStore.Interfaces.Servcies;
+using WebStore.Interfaces.Services;
+using WebStore.Services.InMemory;
+using WebStore.Services.Sql;
 
 namespace WebStore
 {
@@ -41,7 +42,7 @@ namespace WebStore
 
             services.AddIdentity<User, IdentityRole>(options => 
             {
-                // Конфигшурация cookies возможна здесь
+                // Конфигурация cookies возможна здесь
             })
                 .AddEntityFrameworkStores<WebStoreContext>()
                 .AddDefaultTokenProviders();
