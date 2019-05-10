@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using WebStore.Clients.Employees;
 using WebStore.Clients.Values;
 using WebStore.DAL.Context;
 using WebStore.Data;
@@ -34,7 +35,9 @@ namespace WebStore
 
             services.AddDbContext<WebStoreContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConection")));
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+
+            services.AddSingleton<IEmployeesData, EmployeesClient>();
+            //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<ICartService, CookieCartService>();
 
