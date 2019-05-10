@@ -17,6 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Home\" />
+    <Folder Include="Areas\Controllers\" />
     <Folder Include="Infrastructure\Filters\" />
     <Folder Include="Infrastructure\Conventions\" />
     <Folder Include="Infrastructure\Implementations\" />
