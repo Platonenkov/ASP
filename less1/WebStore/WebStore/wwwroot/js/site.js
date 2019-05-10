@@ -29,6 +29,7 @@ $(document).ready(function(){
 	});
 });
 
+// ReSharper disable once StringLiteralWrongQuotes
 jQuery(function($) {'use strict',
 
 	var form = $('.contact-form');

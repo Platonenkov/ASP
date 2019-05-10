@@ -9,7 +9,9 @@
 body {
   font-family: 'Roboto', sans-serif;
   position: relative;
+    /* ReSharper disable InvalidValue */
   font-weight:400px;
+    /* ReSharper restore InvalidValue */
 }
 
 ul li {
@@ -2140,6 +2142,7 @@ h2.title {
 
 .rating-area {
   border: 1px solid #F7F7F0;
+    /* ReSharper disable once InvalidValue */
   direction: block;
   overflow: hidden;
 }
