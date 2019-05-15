@@ -63,7 +63,7 @@ namespace WebStore.Clients.Users
         }
 
         public async Task<string> GetNormalizedRoleNameAsync(IdentityRole role, CancellationToken cancel) =>
-            await (await PostAsync($"{ServiceAddress}/GetNormalizedRoleName", role, cancel))
+            await (await PostAsync($"{ServiceAddress}/GetnormalizedRoleName", role, cancel))
                 .Content
                 .ReadAsAsync<string>(cancel);
 

@@ -52,7 +52,7 @@ namespace WebStore.Clients.Base
 
         protected HttpResponseMessage Put<T>(string url, T item) => PutAsync(url, item).Result;
 
-        protected async Task<HttpResponseMessage> DeleteAsync(string url, CancellationToken Cancel=default) => await _Client.DeleteAsync(url, Cancel);
+        protected async Task<HttpResponseMessage> DeleteAsync(string url, CancellationToken Cancel = default) => await _Client.DeleteAsync(url, Cancel);
 
         protected HttpResponseMessage Delete(string url) => DeleteAsync(url).Result;
     }

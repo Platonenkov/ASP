@@ -2,7 +2,5 @@
 
 namespace WebStore.Domain.DTO
 {
-    public class AddClaimDTO:ClaimDTO
-    {
-    }
+    public class AddClaimDTO : ClaimDTO { }
 }
