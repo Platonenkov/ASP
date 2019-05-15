@@ -1,15 +1,28 @@
 ﻿using System.Collections.Generic;
+using WebStore.Domain.DTO;
 using WebStore.Domain.Entities;
 using WebStore.Domain.ViewModels;
+// ReSharper disable CommentTypo
 
-namespace WebStore.Interfaces.Servcies
+namespace WebStore.Interfaces.Services
 {
+    /// <summary>Сервис управления заказами</summary>
     public interface IOrderService
     {
-        IEnumerable<Order> GetUserOrders(string UserName);
+        /// <summary>Получить все заказы указанного пользователя</summary>
+        /// <param name="UserName"></param>
+        /// <returns></returns>
+        IEnumerable<OrderDTO> GetUserOrders(string UserName);
 
-        Order GetOrderById(int id);
+        /// <summary>Получить заказ по идентификатору</summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        OrderDTO GetOrderById(int id);
 
-        Order CreateOrder(OrderViewModel OrderModel, CartViewModel CartModel, string UserName);
+        /// <summary>Создать новый заказ</summary>
+        /// <param name="OrderModel">Модель-представления заказа</param>
+        /// <param name="UserName">Имя пользователя, создавшего заказ</param>
+        /// <returns>Созданный заказ</returns>
+        OrderDTO CreateOrder(CreateOrderModel OrderModel, string UserName);
     }
 }

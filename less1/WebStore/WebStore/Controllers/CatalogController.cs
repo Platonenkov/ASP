@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entities;
 using WebStore.Domain.ViewModels;
 using WebStore.Infrastructure.Map;
-using WebStore.Interfaces.Servcies;
+using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
 {
@@ -31,7 +31,16 @@ namespace WebStore.Controllers
             {
                 BrandId = BrandId,
                 SectionId = SectionId,
-                Products = products.Select(ProductViewModelMapper.CreateViewModel)
+                Products = products
+                    .Select(p=>new Product
+                    {
+                        Id=p.Id,
+                        Name = p.Name,
+                        Order = p.Order,
+                        Price = p.Price,
+                        ImageUrl = p.ImageUrl
+                    })
+                    .Select(ProductViewModelMapper.CreateViewModel)
             };
 
             return View(catalog_model);

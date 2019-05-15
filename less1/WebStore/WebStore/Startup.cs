@@ -6,15 +6,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using WebStore.Clients.Employees;
+using WebStore.Clients.Orders;
+using WebStore.Clients.Products;
 using WebStore.Clients.Values;
-using WebStore.Controllers.Implementations;
 using WebStore.DAL.Context;
 using WebStore.Data;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Models;
-using WebStore.Infrastructure.Implementations;
+using WebStore.Services;
 using WebStore.Interfaces.Api;
-using WebStore.Interfaces.Servcies;
+using WebStore.Interfaces.Services;
+using WebStore.Services.InMemory;
+using WebStore.Services.Sql;
 
 namespace WebStore
 {
@@ -33,15 +37,20 @@ namespace WebStore
 
             services.AddDbContext<WebStoreContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConection")));
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-            services.AddScoped<IProductData, SqlProductData>();
+
+            services.AddSingleton<IEmployeesData, EmployeesClient>();
+            //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            //services.AddScoped<IProductData, SqlProductData>();
+            services.AddScoped<IProductData, ProductsClient>();
             services.AddScoped<ICartService, CookieCartService>();
+            //services.AddScoped<IOrderService, SqlOrdersService>();
+            services.AddScoped<IOrderService, OrdersClient>();
 
             services.AddTransient<IValuesService, ValuesClient>();
 
             services.AddIdentity<User, IdentityRole>(options => 
             {
-                // Конфигшурация cookies возможна здесь
+                // Конфигурация cookies возможна здесь
             })
                 .AddEntityFrameworkStores<WebStoreContext>()
                 .AddDefaultTokenProviders();

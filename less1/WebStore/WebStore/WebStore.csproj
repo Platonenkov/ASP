@@ -17,8 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Home\" />
+    <Folder Include="Areas\Controllers\" />
     <Folder Include="Infrastructure\Filters\" />
     <Folder Include="Infrastructure\Conventions\" />
+    <Folder Include="Infrastructure\Implementations\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -27,6 +30,7 @@
     <ProjectReference Include="..\WebStore.DAL\WebStore.DAL.csproj" />
     <ProjectReference Include="..\WebStore.Domain\WebStore.Domain.csproj" />
     <ProjectReference Include="..\WebStore.Interfaces\WebStore.Interfaces.csproj" />
+    <ProjectReference Include="..\WebStore.Services\WebStore.Services.csproj" />
   </ItemGroup>
 
 </Project>

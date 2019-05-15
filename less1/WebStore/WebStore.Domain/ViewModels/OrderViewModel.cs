@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebStore.Domain.Entities;
 
 namespace WebStore.Domain.ViewModels
 {
