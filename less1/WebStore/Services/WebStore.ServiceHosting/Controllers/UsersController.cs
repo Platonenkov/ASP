@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
 using WebStore.Domain.DTO;
 using WebStore.Domain.Entities;
@@ -21,8 +22,8 @@ namespace WebStore.ServiceHosting.Controllers
 
         public UsersController(WebStoreContext db) => _UserStore = new UserStore<User>(db);
 
-        [HttpGet("Test")]
-        public string TestGet() => "Test";
+        [HttpGet("AllUsers")]
+        public async Task<IEnumerable<User>> GetAllUsers() => await  _UserStore.Users.ToArrayAsync();
 
         [HttpPost("UserId")]
         public async Task<string> GetUserIdAsync([FromBody] User user) => await _UserStore.GetUserIdAsync(user);
