@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using WebStore.Clients.Employees;
 using WebStore.Clients.Orders;
 using WebStore.Clients.Products;
@@ -23,6 +24,7 @@ using WebStore.Infrastructure.Filters;
 using WebStore.Services;
 using WebStore.Interfaces.Api;
 using WebStore.Interfaces.Servcies;
+using WebStore.Logger;
 using WebStore.Services.Data;
 using WebStore.Services.InMemory;
 using WebStore.Services.Sql;
@@ -110,9 +112,9 @@ namespace WebStore
             //});
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env/*, WebStoreContextInitializer db*/)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory log)
         {
-            //db.InitializeAsync().Wait();
+            log.AddLog4Net();
 
             if (env.IsDevelopment())
             {

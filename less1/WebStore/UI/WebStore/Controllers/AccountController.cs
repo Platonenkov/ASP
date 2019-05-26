@@ -39,10 +39,17 @@ namespace WebStore.Controllers
             var creation_result = await _UserManager.CreateAsync(new_user, model.Password);
             if (creation_result.Succeeded) // Если получилось
             {
+                _Logger.LogInformation("Пользователь {0} зарегистрирован", new_user.UserName);
                 await _SignInManager.SignInAsync(new_user, false); // То сразу логиним его на сайте
-                 
+
+                _Logger.LogInformation("Пользователь {0} вошёл в систему", new_user.UserName);
                 return RedirectToAction("Index", "Home"); // и отправляем на главную страницу
             }
+
+            //Запись ошибок в лог
+            _Logger.LogWarning("При регистрации пользователя {0} возникли ошибки: {1}",
+                model.UserName,
+                string.Join(",", creation_result.Errors.Select(e=>e.Description)));
 
             foreach (var error in creation_result.Errors)         // Если что-то пошло не так...
                 ModelState.AddModelError("", error.Description);  // Все ошибки заносим в состояние модели
@@ -61,6 +68,7 @@ namespace WebStore.Controllers
 
             if (login_result.Succeeded)
             {
+
                 _Logger.LogInformation("Пользователь {0} успешно вошёл в систему", login.UserName);
 
                 if (Url.IsLocalUrl(login.ReturnUrl))
@@ -75,7 +83,10 @@ namespace WebStore.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            var user_name = User.Identity.Name;
             await _SignInManager.SignOutAsync();
+            _Logger.LogInformation("Пользователь {0} вышел из системы", user_name);
+
             return RedirectToAction("Index", "Home");
         }
 

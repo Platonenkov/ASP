@@ -16,6 +16,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
 using WebStore.Interfaces.Servcies;
+using WebStore.Logger;
 using WebStore.Services;
 using WebStore.Services.Data;
 using WebStore.Services.InMemory;
@@ -42,6 +43,23 @@ namespace WebStore.ServiceHosting
                .AddEntityFrameworkStores<WebStoreContext>()
                .AddDefaultTokenProviders();
 
+            services.Configure<IdentityOptions>(cfg =>
+            {
+                cfg.Password.RequiredLength = 3;
+                cfg.Password.RequireDigit = false;
+                cfg.Password.RequireLowercase = false;
+                cfg.Password.RequireUppercase = false;
+                cfg.Password.RequireNonAlphanumeric = false;
+                cfg.Password.RequiredUniqueChars = 3;
+
+                cfg.Lockout.MaxFailedAccessAttempts = 10;
+                cfg.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                cfg.Lockout.AllowedForNewUsers = true;
+
+                cfg.User.RequireUniqueEmail = false; // грабли!
+            });
+
+
             services.AddDbContext<WebStoreContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConection")));
             services.AddTransient<WebStoreContextInitializer>();
 
@@ -53,8 +71,10 @@ namespace WebStore.ServiceHosting
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreContextInitializer db)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreContextInitializer db, ILoggerFactory log)
         {
+            log.AddLog4Net();
+
             db.InitializeAsync().Wait();
 
             if (env.IsDevelopment())
