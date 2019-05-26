@@ -14,10 +14,7 @@ namespace WebStore.Controllers
     {
         private readonly IProductData _ProductData;
 
-        public CatalogController(IProductData ProductData)
-        {
-            _ProductData = ProductData;
-        }
+        public CatalogController(IProductData ProductData) => _ProductData = ProductData;
 
         public IActionResult Shop(int? SectionId, int? BrandId)
         {
@@ -33,13 +30,18 @@ namespace WebStore.Controllers
                 SectionId = SectionId,
                 Products = products
                    .Select(p => new Product
-                    {
-                        Id = p.Id,
-                        Name = p.Name,
-                        Order = p.Order,
-                        Price = p.Price,
-                        ImageUrl = p.ImageUrl
-                    })
+                   {
+                       Id = p.Id,
+                       Name = p.Name,
+                       Order = p.Order,
+                       Price = p.Price,
+                       ImageUrl = p.ImageUrl,
+                       Brand = p.Brand is null ? null : new Brand
+                       {
+                           Id = p.Brand.Id,
+                           Name = p.Brand.Name
+                       }
+                   })
                    .Select(ProductsMapper.CreateViewModel)
             };
 

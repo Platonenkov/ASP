@@ -13,6 +13,8 @@ namespace WebStore.Services.Map
             model.Order = product.Order;
             model.ImageUrl = product.ImageUrl;
             model.Price = product.Price;
+            model.Brand = product.Brand?.Name;
+
         }
 
         public static ProductViewModel CreateViewModel(this Product product)
